@@ -27,7 +27,6 @@ LAKITU_RDEPEND="
 	app-editors/vim
 	app-emulation/cloud-init
 	app-emulation/docker
-	app-emulation/docker-credential-gcr
 	app-emulation/kubernetes
 	app-shells/bash
 	chromeos-base/chromeos-init-systemd
