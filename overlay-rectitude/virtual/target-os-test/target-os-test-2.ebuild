@@ -12,4 +12,4 @@ SLOT="0"
 KEYWORDS="*"
 IUSE=""
 
-RDEPEND="virtual/target-lakitu-os-test"
+RDEPEND="virtual/target-rectitude-os-test"

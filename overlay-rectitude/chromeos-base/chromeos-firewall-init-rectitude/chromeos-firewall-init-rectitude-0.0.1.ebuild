@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-DESCRIPTION="Install the upstart jobs that configure the firewall."
+DESCRIPTION="Install the systemd jobs that configure the firewall."
 HOMEPAGE="http://www.chromium.org/"
 LICENSE="BSD-Google"
 SLOT="0"
@@ -20,7 +20,7 @@ RDEPEND="
 "
 
 src_install() {
-	exeinto /usr/share/cloud
+	exeinto /usr/share/rectitude
 	doexe "${FILESDIR}"/iptables-setup
 	doexe "${FILESDIR}"/ip6tables-setup
 

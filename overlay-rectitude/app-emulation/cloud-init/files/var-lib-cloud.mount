@@ -2,7 +2,7 @@
 # two directories are required to be executable. We intend not to persist
 # cloud-init data across reboots. As a result, cloud-init will fetch metadata
 # and run user's configuration again after reboot. This is important as /etc/init
-# in lakitu is stateless.
+# in rectitude is stateless.
 
 [Unit]
 Description=/var/lib/cloud

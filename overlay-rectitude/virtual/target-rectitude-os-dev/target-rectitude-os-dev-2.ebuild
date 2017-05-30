@@ -5,7 +5,7 @@
 EAPI="4"
 
 DESCRIPTION="List of packages that make up the base OS image;
-by default; here we build a Lakitu dev image"
+by default; here we build a Rectitude dev image"
 HOMEPAGE="http://dev.chromium.org/"
 
 LICENSE="BSD-Google"

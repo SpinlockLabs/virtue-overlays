@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit systemd user
 
-DESCRIPTION="Dev image init scripts for Lakitu"
+DESCRIPTION="Dev image init scripts for Rectitude"
 HOMEPAGE=""
 SRC_URI=""
 

@@ -13,7 +13,7 @@ USE="${USE} -vtconsole"
 # right implementation.
 USE="${USE} cros_embedded"
 
-# target-lakitu-os features that are enabled
+# target-rectitude-os features that are enabled
 USE="${USE} pam"
 
 # Kernel specific use flags.
@@ -24,14 +24,14 @@ USE="${USE} -fbconsole -firmware_install -mbim -vlan"
 # This is needed to make chromeos-base/autotest-all compile
 USE="${USE} chromeless_tty chromeless_tests"
 
-# Stateful partition does not need to be encrypted in lakitu.
+# Stateful partition does not need to be encrypted in Rectitude.
 USE="${USE} -encrypted_stateful"
 
 # Disable the feature that chromeos-base/update_engine uses to determine
 # whether to pull in chromeos-base/power_manager.
 USE="${USE} -power_management"
 
-# Disable shill, Lakitu uses systemd-networkd instead.
+# Disable shill, Rectitude uses systemd-networkd instead.
 USE="${USE} -shill"
 
 # Disable cups, which expects certain features from upstart that we don't want;
@@ -63,7 +63,7 @@ USE="${USE} crash_reporting"
 # Disable the symlink to avoid conflict when building sys-apps/baselayout.
 SYMLINK_LIB="no"
 
-# The following tests from smoke suite are currently failing on lakitu.
+# The following tests from smoke suite are currently failing on Rectitude.
 # TODO(andreyu): find out which of these tests could or should be enabled.
 USE="${USE}
   -tests_security_AccountsBaseline

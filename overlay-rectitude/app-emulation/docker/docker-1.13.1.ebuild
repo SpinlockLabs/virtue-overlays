@@ -248,7 +248,7 @@ src_compile() {
 	# time to build!
 	./hack/make.sh dynbinary || die 'dynbinary failed'
 
-	# Don't build the man pages for lakitu. This also helps us avoid the
+	# Don't build the man pages for rectitude. This also helps us avoid the
 	# dependency on dev-go/go-md2man.
 	# ./man/md2man-all.sh || die "unable to generate man pages"
 }

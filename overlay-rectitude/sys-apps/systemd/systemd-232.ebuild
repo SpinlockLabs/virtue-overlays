@@ -78,7 +78,7 @@ RDEPEND="${COMMON_DEPEND}
 
 # sys-apps/dbus: the daemon only (+ build-time lib dep for tests)
 # The following PDEPENDs are present in Gentoo upstream but don't make sense for
-# Lakitu:
+# Rectitude:
 #	  !vanilla? ( sys-apps/gentoo-systemd-integration )
 #	  >=sys-fs/udev-init-scripts-25
 # gentoo-systemd-integration: most of which conflicts with ChromeOS settings.
@@ -156,31 +156,31 @@ src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}"/232-0001-build-sys-check-for-lz4-in-the-old-and-new-numbering.patch
 		"${FILESDIR}"/232-0002-build-sys-add-check-for-gperf-lookup-function-signat.patch
-		# Lakitu: we do want audit enabled.
+		# Rectitude: we do want audit enabled.
 		# "${FILESDIR}/218-Dont-enable-audit-by-default.patch"
 		"${FILESDIR}/228-noclean-tmp.patch"
 		"${FILESDIR}/232-systemd-user-pam.patch"
 
-		# Lakitu: CL:*250967
+		# Rectitude: CL:*250967
 		"${FILESDIR}"/232-tmpfiles-no-srv.patch
-		# Lakitu: This prevents the kernel from logging all audit messages to
+		# Rectitude: This prevents the kernel from logging all audit messages to
 		# both dmesg and audit log. b/29581598.
 		"${FILESDIR}"/225-audit-set-pid.patch
-		# Lakitu: allow networkd => hostnamed communication w/o polkit.
+		# Rectitude: allow networkd => hostnamed communication w/o polkit.
 		"${FILESDIR}"/225-allow-networkd-to-hostnamed.patch
-		# Lakitu: work around the 64 bit restriction of hostname length from
+		# Rectitude: work around the 64 bit restriction of hostname length from
 		# kernel. b/27702816.
 		"${FILESDIR}"/232-single-label-hostname.patch
-		# Lakitu: CL:*256679
+		# Rectitude: CL:*256679
 		"${FILESDIR}"/225-Force-re-creation-of-etc-localtime-symlink.patch
-		# Lakitu: make networkd default to not touch IP forwarding setting.
+		# Rectitude: make networkd default to not touch IP forwarding setting.
 		# b/33257712
 		"${FILESDIR}"/225-networkd-default-ip-forwarding-to-kernel.patch
-		# Lakitu: don't install uaccess rules without acl
+		# Rectitude: don't install uaccess rules without acl
 		"${FILESDIR}"/225-no-uaccess.patch
-		# Lakitu: CL:418388
+		# Rectitude: CL:418388
 		"${FILESDIR}"/232-nspawn-sigchld.patch
-		# Lakitu: Add DHCP Search Domain List support. b/36192250
+		# Rectitude: Add DHCP Search Domain List support. b/36192250
 		"${FILESDIR}"/232-dhcp-119.patch
 	)
 
@@ -296,7 +296,7 @@ multilib_src_configure() {
 		--enable-resolved
 	)
 
-	# Lakitu: Disable all features that we are not using and which are not
+	# Rectitude: Disable all features that we are not using and which are not
 	# otherwise disabled by USE flags.
 	myeconfargs+=(
 		--disable-backlight
@@ -405,7 +405,7 @@ multilib_src_install_all() {
 	# Symlink /etc/sysctl.conf for easy migration.
 	dosym ../sysctl.conf /etc/sysctl.d/99-sysctl.conf
 
-	# Lakitu: Following lines came from Gentoo upstream, but we want these so
+	# Rectitude: Following lines came from Gentoo upstream, but we want these so
 	# networkd, resolved and timesyncd start on boot.
 	# From Gentoo: "If we install these symlinks, there is no way for the
 	# sysadmin to remove them permanently".
@@ -415,33 +415,33 @@ multilib_src_install_all() {
 	# rm -r "${D}"/etc/systemd/system/sockets.target.wants || die
 	# rm -r "${D}"/etc/systemd/system/sysinit.target.wants || die
 
-	# Lakitu:
+	# Rectitude:
 	dosym /usr/bin/udevadm sbin/udevadm
 	dosym /usr/lib/systemd/systemd-udevd sbin/udevd
 	dosym /run/systemd/resolve/resolv.conf etc/resolv.conf
 
-	# Lakitu: Disable all sysctl settings. In ChromeOS sysctl.conf is
+	# Rectitude: Disable all sysctl settings. In ChromeOS sysctl.conf is
 	# provided by chromeos-base.
 	rm "${D}"/usr/lib/sysctl.d/*
 
-	# Lakitu: install our systemd-preset file.
+	# Rectitude: install our systemd-preset file.
 	insinto /usr/lib/systemd/system-preset
 	rm -f "${D}"/usr/lib/systemd/system-preset/*
-	doins "${FILESDIR}"/00-lakitu.preset
+	doins "${FILESDIR}"/00-rectitude.preset
 
-	# Lakitu: there is no VT so no need for getty on tty1
+	# Rectitude: there is no VT so no need for getty on tty1
 	rm  -f "${D}"/etc/systemd/system/getty.target.wants/getty@tty1.service
 
-	# Lakitu: Install network files.
+	# Rectitude: Install network files.
 	insinto /usr/lib/systemd/network
 	doins "${FILESDIR}"/*.network
 
-	# Lakitu: Turn off Predictable Network Interface Names to minimize the
+	# Rectitude: Turn off Predictable Network Interface Names to minimize the
 	# upgrade side-effects.
 	# https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/
 	dosym /dev/null /etc/systemd/network/99-default.link
 
-	# Lakitu: Don't boot into graphical.target
+	# Rectitude: Don't boot into graphical.target
 	local unitdir=$(systemd_get_unitdir)
 	rm "${D}"/"${unitdir}"/default.target || die
 	dosym multi-user.target "${unitdir}"/default.target
@@ -503,22 +503,22 @@ pkg_postinst() {
 	newusergroup systemd-network
 	newusergroup systemd-resolve
 
-	# Lakitu: Disable groups not currently used.
+	# Rectitude: Disable groups not currently used.
 	# newusergroup systemd-bus-proxy
 	# newusergroup systemd-journal-gateway
 	# newusergroup systemd-journal-remote
 	# newusergroup systemd-journal-upload
 
-	# Lakitu: Enable accounting for all supported controllers (CPU, Memory and Block)
+	# Rectitude: Enable accounting for all supported controllers (CPU, Memory and Block)
 	sed -i 's/#DefaultCPUAccounting=no/DefaultCPUAccounting=yes/' "${ROOT}"/etc/systemd/system.conf
 	sed -i 's/#DefaultBlockIOAccounting=no/DefaultBlockIOAccounting=yes/' "${ROOT}"/etc/systemd/system.conf
 	sed -i 's/#DefaultMemoryAccounting=no/DefaultMemoryAccounting=yes/' "${ROOT}"/etc/systemd/system.conf
 
-	# Lakitu: Set default log rotation policy: 100M for each journal; 1G total.
+	# Rectitude: Set default log rotation policy: 100M for each journal; 1G total.
 	sed -i 's/#SystemMaxUse=/SystemMaxUse=1G/' "${ROOT}"/etc/systemd/journald.conf
 	sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=100M/' "${ROOT}"/etc/systemd/journald.conf
 
-	# Lakitu: Enable persistent storage for the journal
+	# Rectitude: Enable persistent storage for the journal
 	sed -i 's/#Storage=auto/Storage=persistent/' "${ROOT}"/etc/systemd/journald.conf
 
 	systemd_update_catalog

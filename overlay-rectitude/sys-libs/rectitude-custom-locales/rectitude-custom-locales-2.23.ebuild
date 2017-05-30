@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils
 
-DESCRIPTION="Package that installs Lakitu specific locales"
+DESCRIPTION="Package that installs Rectitude specific locales"
 LICENSE="BSD-Google"
 SLOT="0"
 KEYWORDS="*"

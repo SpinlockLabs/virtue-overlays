@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-DESCRIPTION="Customization for the Lakitu Image"
+DESCRIPTION="Customization for the Rectitude Image"
 HOMEPAGE="http://dev.chromium.org/"
 
 LICENSE="BSD-Google"
@@ -12,7 +12,7 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="bootchart +crash_reporting +pam readahead systemd watchdog apparmor"
 
-LAKITU_RDEPEND="
+RECTITUDE_RDEPEND="
 	bootchart? ( app-benchmarks/bootchart )
 	crash_reporting? ( chromeos-base/crash-reporter )
 	pam? (
@@ -33,7 +33,6 @@ LAKITU_RDEPEND="
 	chromeos-base/chromeos-installer
 	chromeos-base/cloud-filesystem-init
 	chromeos-base/cloud-network-init
-	chromeos-base/cloud-udev-config
 	chromeos-base/ima-policy
 	chromeos-base/openssh-server-init
 	chromeos-base/terminfo-extra
@@ -64,10 +63,10 @@ LAKITU_RDEPEND="
 	virtual/udev
 "
 
-RDEPEND="${LAKITU_RDEPEND}
+RDEPEND="${RECTITUDE_RDEPEND}
 "
 
 DEPEND="
-	${LAKITU_RDEPEND}
+	${RECTITUDE_RDEPEND}
 	sys-boot/syslinux
 "

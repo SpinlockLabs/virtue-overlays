@@ -7,7 +7,7 @@ CROS_WORKON_TREE="2520c2b90d73e97fce421a335a6eec6a963c5bfc"
 CROS_WORKON_PROJECT="chromiumos/third_party/kernel"
 CROS_WORKON_LOCALNAME="kernel/v4.4"
 
-CHROMEOS_KERNEL_CONFIG="${FILESDIR}/lakitu_kernel_config_4_4"
+CHROMEOS_KERNEL_CONFIG="${FILESDIR}/rectitude_kernel_config_4_4"
 
 # This must be inherited *after* EGIT/CROS_WORKON variables defined
 inherit cros-workon cros-kernel2 osreleased

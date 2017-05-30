@@ -20,7 +20,7 @@ RDEPEND="${DEPEND}
 	app-shells/bash
 	net-misc/openssh
 	sys-apps/mawk
-	sys-libs/lakitu-custom-locales
+	sys-libs/rectitude-custom-locales
 	sys-libs/timezone-data
 	"
 

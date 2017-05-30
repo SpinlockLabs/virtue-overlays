@@ -7,7 +7,7 @@ sec-policy/apparmor-profiles minimal
 # Docker uses libapparmor, so this should have static libs included.
 sys-libs/libapparmor static-libs
 
-# Lakitu uses overlayfs graph driver in docker.
+# Rectitude uses overlayfs graph driver in docker.
 app-emulation/docker -device-mapper overlay
 
 # Use generated test key.

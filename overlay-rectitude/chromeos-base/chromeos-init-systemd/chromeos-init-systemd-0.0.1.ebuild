@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit systemd user
 
-DESCRIPTION="Init scripts for Lakitu"
+DESCRIPTION="Init scripts for Rectitude"
 HOMEPAGE=""
 SRC_URI=""
 
@@ -45,7 +45,7 @@ src_install() {
 	systemd_newtmpfilesd "${FILESDIR}"/chromeos-init.tmpfiles chromeos-init.conf
 
 	insinto $(systemd_get_unitdir)/sys-kernel-debug.mount.d
-	newins "${FILESDIR}"/sys-kernel-debug-lakitu.conf lakitu.conf
+	newins "${FILESDIR}"/sys-kernel-debug-rectitude.conf rectitude.conf
 
 	exeinto $(systemd_get_unitdir)-generators
 	doexe "${FILESDIR}"/chromeos-mount-generator

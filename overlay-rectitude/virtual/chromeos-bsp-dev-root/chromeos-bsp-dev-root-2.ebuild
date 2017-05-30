@@ -3,7 +3,7 @@
 
 EAPI="5"
 
-DESCRIPTION="Packages installed into root of Lakitu dev images"
+DESCRIPTION="Packages installed into root of Rectitude dev images"
 HOMEPAGE="http://src.chromium.org"
 
 LICENSE="BSD-Google"
