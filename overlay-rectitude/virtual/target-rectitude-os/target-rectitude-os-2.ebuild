@@ -20,7 +20,6 @@ RECTITUDE_RDEPEND="
 		sys-auth/pam_pwdfile
 	)
 	watchdog? ( sys-apps/daisydog )
-	app-admin/compute-image-packages
 	app-admin/sudo
 	app-admin/toolbox
 	app-arch/tar
