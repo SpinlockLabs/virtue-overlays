@@ -1,0 +1,9 @@
+[Unit]
+Description=Mount /var/lib/docker with 'exec'
+DefaultDependencies=false
+After=var-lib-docker.mount
+Before=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/mount -o remount,exec /var/lib/docker

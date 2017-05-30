@@ -1,0 +1,80 @@
+LINUX_FIRMWARE=""
+CHROMEOS_KERNEL_SPLITCONFIG="chromiumos-x86_64"
+CHROMEOS_KERNEL_ARCH="x86_64"
+
+# Empty USE to allow the same form below in real assignments
+USE=""
+
+USE="${USE} -cros_disks -cros_p2p -cros_host"
+USE="${USE} -debugd -opengl -wifi_bootstrapping -wimax -cellular -bluetooth -tpm -vpn"
+USE="${USE} -vtconsole"
+
+# Used by virtual/chromeos-bootcomplete and virtual/update-policy to pull the
+# right implementation.
+USE="${USE} cros_embedded"
+
+# target-lakitu-os features that are enabled
+USE="${USE} pam"
+
+# Kernel specific use flags.
+USE="${USE} kernel_sources kernel-4_4"
+# Disable some kernel options.
+USE="${USE} -fbconsole -firmware_install -mbim -vlan"
+
+# This is needed to make chromeos-base/autotest-all compile
+USE="${USE} chromeless_tty chromeless_tests"
+
+# Stateful partition does not need to be encrypted in lakitu.
+USE="${USE} -encrypted_stateful"
+
+# Disable the feature that chromeos-base/update_engine uses to determine
+# whether to pull in chromeos-base/power_manager.
+USE="${USE} -power_management"
+
+# Disable shill, Lakitu uses systemd-networkd instead.
+USE="${USE} -shill"
+
+# Disable cups, which expects certain features from upstart that we don't want;
+# and we don't need printing support anyway.
+USE="${USE} -cups"
+
+# Enable AppArmor support.  The USE flag causes certain packages to be built
+# with AppArmor support, and certain other packages to be installed on the base
+# image.  The kernel feature must be enabled separately by adding
+# "security=apparmor" to the kernel commandline.
+USE="${USE} apparmor"
+
+# Enable seccomp support.
+USE="${USE} seccomp"
+
+# Disable agetty on tty2
+TTY_CONSOLE=""
+USE="${USE} -tty_console_tty2"
+
+# Enable feature: systemd
+USE="${USE} systemd -syslog audit"
+
+# Development devices do not have a HWID baked in.
+USE="${USE} hwid_override"
+
+# Enable crash reporting support
+USE="${USE} crash_reporting"
+
+# Disable the symlink to avoid conflict when building sys-apps/baselayout.
+SYMLINK_LIB="no"
+
+# The following tests from smoke suite are currently failing on lakitu.
+# TODO(andreyu): find out which of these tests could or should be enabled.
+USE="${USE}
+  -tests_security_AccountsBaseline
+  -tests_kernel_ConfigVerify
+  -tests_kernel_CryptoAPI
+  -tests_logging_UserCrash
+  -tests_logging_CrashSender
+  -tests_security_RootCA
+  -tests_security_Firewall
+  -tests_security_ChromiumOSLSM
+  -tests_platform_FilePerms
+  -tests_security_OpenSSLBlacklist
+  -tests_security_mprotect
+  -tests_security_SysLogPermissions"

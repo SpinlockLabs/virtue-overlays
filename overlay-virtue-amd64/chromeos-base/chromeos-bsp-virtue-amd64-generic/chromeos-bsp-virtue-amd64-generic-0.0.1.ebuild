@@ -8,4 +8,4 @@ SLOT="0"
 KEYWORDS="*"
 IUSE=""
 
-RDEPEND="${RDEPEND} virtual/target-os-virtue"
+RDEPEND="${RDEPEND} virtual/target-virtue-os"
